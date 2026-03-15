@@ -1,5 +1,6 @@
 students = {}
 
+# ---------- HELPER FUNCTIONS ----------
 def calculate_total(marks):
     total_sum = 0
     for mark in marks:
@@ -26,6 +27,17 @@ def calculate_grade(percentage):
         return "Fail"
 
 
+def display_student(roll, details):
+    print("Roll number:", roll)
+    print("Student name:", details['student_name'])
+    print("Marks:", details['marks'])
+    print("Total marks:", details['total_marks'])
+    print("Percentage:", round(details['percentage'], 2))
+    print("Grade:", details['grade'])
+    print("---------------------")
+
+
+# ---------- MAIN FUNCTIONS ----------
 def add_student():
     while True:
         roll_number = input("Enter student roll number: ")
@@ -72,6 +84,8 @@ def add_student():
     }
 
     students[roll_number] = student
+    print("Student record added successfully!")
+    print("---------------------")
 
 
 def view_all_students():
@@ -80,13 +94,7 @@ def view_all_students():
         return
 
     for roll, details in students.items():
-        print("Roll number:", roll)
-        print("Student name:", details['student_name'])
-        print("Marks:", details['marks'])
-        print("Total marks:", details['total_marks'])
-        print("Percentage:", round(details['percentage'], 2))
-        print("Grade:", details['grade'])
-        print("---------------------")
+        display_student(roll, details)
 
 
 def search_student():
@@ -98,12 +106,7 @@ def search_student():
 
     if roll_number in students:
         details = students[roll_number]
-        print("Roll number:", roll_number)
-        print("Student name:", details['student_name'])
-        print("Marks:", details['marks'])
-        print("Total marks:", details['total_marks'])
-        print("Percentage:", round(details['percentage'], 2))
-        print("Grade:", details['grade'])
+        display_student(roll_number, details)
     else:
         print(f"No student found with roll number {roll_number}.")
 
@@ -113,26 +116,24 @@ def find_topper():
         print("No student records found!")
         return
 
-    topper_name = ""
+    topper_roll = ""
+    topper_details = {}
     highest_marks = -1
-    topper_grade = "A"
-    topper_marks = []
 
     for roll, details in students.items():
         if details['total_marks'] > highest_marks:
             highest_marks = details['total_marks']
-            topper_name = details['student_name']
-            topper_grade = details['grade']
-            topper_marks = details['marks']
+            topper_roll = roll
+            topper_details = details
 
-    print("Topper:", topper_name)
-    print("Total Marks:", highest_marks)
-    print("Marks:", topper_marks)
-    print("Grade:", topper_grade)
+    print("Topper Details")
+    print("---------------------")
+    display_student(topper_roll, topper_details)
 
 
 def menu():
     while True:
+        print("\n===== Student Result Management System =====")
         print("1. Add student")
         print("2. View all students")
         print("3. Search student")
@@ -158,7 +159,7 @@ def menu():
             print("Thank you for using this.")
             break
         else:
-            print("Invalid choice")
+            print("Invalid choice! Please enter a number between 1 and 5.")
 
 
 menu()
