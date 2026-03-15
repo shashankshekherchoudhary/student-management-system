@@ -70,15 +70,15 @@ def view_all_students():
     if len(students) == 0:
         print("There is no student in the record!")
         return
-    else :
-        for roll ,details in students.items():
-            print("Roll number : " , roll)
-            print("Student name : ",details['student_name'])
-            print("Marks : ", details['marks'])
-            print("Total marks : ", details['total_marks'])
-            print("Percentage : " , details['percentage'])
-            print("Grade : " , details['grade'])
-            print("---------------------")
+    
+    for roll ,details in students.items():
+        print("Roll number : " , roll)
+        print("Student name : ",details['student_name'])
+        print("Marks : ", details['marks'])
+        print("Total marks : ", details['total_marks'])
+        print("Percentage : " , details['percentage'])
+        print("Grade : " , details['grade'])
+        print("---------------------")
 
 
 def search_student():
