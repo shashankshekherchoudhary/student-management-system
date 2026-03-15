@@ -38,12 +38,17 @@ def add_student():
     marks =[]
     for sub in subjects:
         while True:
-            mark = int(input(f"Enter marks for {sub} out of 100 : "))
-            if mark < 0 or mark > 100:
-                print("Marks should be between 0 and 100")
-                continue
-            marks.append(mark)
-            break
+            try:
+                mark = int(input(f"Enter marks for {sub} out of 100 : "))
+                if mark < 0 or mark > 100:
+                    print("Marks should be between 0 and 100")
+                    continue
+                marks.append(mark)
+                break
+            except ValueError:
+                print("Invalid input! Enter a number only.")
+        
+            
 
     total_marks = total(marks)
     percentagee = percentage(total_marks,marks)
