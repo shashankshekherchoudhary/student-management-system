@@ -32,8 +32,12 @@ def add_student():
             continue
         break
 
-
-    student_name = input("Enter student name : ")
+    while True:
+        student_name = input("Enter student name : ").strip()
+        if student_name == "":
+            print("Student name should not be empty!")
+            continue
+        break
     subjects = ['Physics','Chemistry','Mathematic']
     marks =[]
     for sub in subjects:
@@ -61,7 +65,7 @@ def add_student():
         'percentage' : percentagee ,
         'grade' : gradee 
     }
-    students.update({roll_number : student})
+    students[roll_number] = student
 def view_all_students():
     if len(students) == 0:
         print("There is no student in the record!")
@@ -74,6 +78,7 @@ def view_all_students():
             print("Total marks : ", details['total_marks'])
             print("Percentage : " , details['percentage'])
             print("Grade : " , details['grade'])
+            print("---------------------")
 
 
 def search_student():
@@ -82,15 +87,14 @@ def search_student():
         return
     else:
         roll_number = input("Enter roll number to search : ")
-        for roll , details in students.items():
-            if roll_number == roll:
-                print("Roll number : " , roll)
-                print("Student name : ",details['student_name'])
-                print("Marks : ", details['marks'])
-                print("Total marks : ", details['total_marks'])
-                print("Percentage : " , details['percentage'])
-                print("Grade : " , details['grade'])
-                break
+        if roll_number in students:
+            details = students[roll_number]
+            print("Roll number : " , roll_number)
+            print("Student name : ",details['student_name'])
+            print("Marks : ", details['marks'])
+            print("Total marks : ", details['total_marks'])
+            print("Percentage : " , details['percentage'])
+            print("Grade : " , details['grade'])
         else:
             print(f"With this {roll_number} roll number there is no student in our record! ")
 def find_topper():
@@ -108,7 +112,7 @@ def find_topper():
 
 
     print("Topper:", topper_name)
-    print("Marks : " , details['total_marks'])
+    
 
 
     
