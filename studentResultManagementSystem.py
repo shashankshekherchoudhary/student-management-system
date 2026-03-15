@@ -58,28 +58,36 @@ def add_student():
     }
     students.update({roll_number : student})
 def view_all_students():
-    for roll ,details in students.items():
-        print("Roll number : " , roll)
-        print("Student name : ",details['student_name'])
-        print("Marks : ", details['marks'])
-        print("Total marks : ", details['total_marks'])
-        print("Percentage : " , details['percentage'])
-        print("Grade : " , details['grade'])
-
-
-def search_student():
-    roll_number = input("Enter roll number to search : ")
-    for roll , details in students.items():
-        if roll_number == roll:
+    if len(students) == 0:
+        print("There is no sstudent in the record!")
+        return
+    else :
+        for roll ,details in students.items():
             print("Roll number : " , roll)
             print("Student name : ",details['student_name'])
             print("Marks : ", details['marks'])
             print("Total marks : ", details['total_marks'])
             print("Percentage : " , details['percentage'])
             print("Grade : " , details['grade'])
-            break
+
+
+def search_student():
+    if len(students) == 0:
+        print("There is no sstudent in the record!")
+        return
     else:
-        print(f"With this {roll_number} roll number there is no student in our record! ")
+        roll_number = input("Enter roll number to search : ")
+        for roll , details in students.items():
+            if roll_number == roll:
+                print("Roll number : " , roll)
+                print("Student name : ",details['student_name'])
+                print("Marks : ", details['marks'])
+                print("Total marks : ", details['total_marks'])
+                print("Percentage : " , details['percentage'])
+                print("Grade : " , details['grade'])
+                break
+        else:
+            print(f"With this {roll_number} roll number there is no student in our record! ")
 def find_topper():
     if len(students) == 0:
         print("There is no student in the record!")
