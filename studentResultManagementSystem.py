@@ -59,7 +59,7 @@ def add_student():
     students.update({roll_number : student})
 def view_all_students():
     if len(students) == 0:
-        print("There is no sstudent in the record!")
+        print("There is no student in the record!")
         return
     else :
         for roll ,details in students.items():
@@ -73,7 +73,7 @@ def view_all_students():
 
 def search_student():
     if len(students) == 0:
-        print("There is no sstudent in the record!")
+        print("There is no student in the record!")
         return
     else:
         roll_number = input("Enter roll number to search : ")
