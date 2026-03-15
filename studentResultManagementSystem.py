@@ -119,7 +119,12 @@ def menu():
         print("3. Search student")
         print("4. Find topper")
         print("5. Exit")
-        choice = int(input("Entere your choice : "))
+        while True:
+            try:
+                choice = int(input("Entere your choice : "))
+                break
+            except ValueError:
+                print("Invalid input! Please enter number only.")
         if choice == 1:
             add_student()
         elif choice == 2:
