@@ -26,7 +26,6 @@ def calculate_grade(percentage):
     else:
         return "Fail"
 
-
 def display_student(roll, details):
     print("Roll number:", roll)
     print("Student name:", details['student_name'])
@@ -129,6 +128,60 @@ def find_topper():
     print("Topper Details")
     print("---------------------")
     display_student(topper_roll, topper_details)
+def update_student():
+    if not students:
+        print("No student records found!")
+        return
+
+    roll_number = input("Enter roll number to update details: ")
+
+    if roll_number not in students:
+        print("Student not found!")
+        return
+
+    update_choice = input("What do you want to update? (name/marks): ").strip().lower()
+
+    if update_choice == "name":
+        while True:
+            new_name = input("Enter updated name: ").strip()
+            if not new_name:
+                print("Name cannot be empty!")
+                continue
+            break
+        students[roll_number]['student_name'] = new_name
+        print("Name updated successfully!")
+
+    elif update_choice == "marks":
+        subjects = ['Physics', 'Chemistry', 'Mathematics']
+        new_marks = []
+
+        for sub in subjects:
+            while True:
+                try:
+                    mark = int(input(f"Enter your marks in {sub} out of 100: "))
+                    if mark < 0 or mark > 100:
+                        print("Marks should be between 0 and 100")
+                        continue
+                    new_marks.append(mark)
+                    break
+                except ValueError:
+                    print("Invalid input! Enter a number only.")
+
+        students[roll_number]['marks'] = new_marks
+        total_marks = calculate_total(new_marks)
+        student_percentage = calculate_percentage(total_marks, new_marks)
+        student_grade = calculate_grade(student_percentage)
+
+        students[roll_number]['total_marks'] = total_marks
+        students[roll_number]['grade'] = student_grade
+        students[roll_number]['percentage'] = student_percentage
+
+        print("Marks updated successfully!")
+
+    else:
+        print("Invalid update choice!")
+            
+
 
 
 def menu():
