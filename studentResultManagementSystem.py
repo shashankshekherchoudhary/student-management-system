@@ -191,7 +191,8 @@ def menu():
         print("2. View all students")
         print("3. Search student")
         print("4. Find topper")
-        print("5. Exit")
+        print("5. Update student records")
+        print("6. Exit")
 
         while True:
             try:
@@ -209,6 +210,8 @@ def menu():
         elif choice == 4:
             find_topper()
         elif choice == 5:
+            update_student()
+        elif choice == 6:
             print("Thank you for using this.")
             break
         else:
