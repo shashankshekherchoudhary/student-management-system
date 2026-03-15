@@ -181,8 +181,21 @@ def update_student():
     else:
         print("Invalid update choice!")
             
+def delete_student():
+    if not students:
+        print("No student records found!")
+        return
 
+    roll_number = input("Enter roll number to update details: ")
 
+    if roll_number not in students:
+        print("Student not found!")
+        return
+    if roll_number in students:
+        details = students[roll_number]
+        display_student(roll_number,details)
+    students.pop(roll_number)   
+    print(f"Student with above details deleted")
 
 def menu():
     while True:
@@ -192,7 +205,8 @@ def menu():
         print("3. Search student")
         print("4. Find topper")
         print("5. Update student records")
-        print("6. Exit")
+        print("5. Delete student records")
+        print("7. Exit")
 
         while True:
             try:
@@ -212,6 +226,8 @@ def menu():
         elif choice == 5:
             update_student()
         elif choice == 6:
+            delete_student()
+        elif choice == 7:
             print("Thank you for using this.")
             break
         else:
