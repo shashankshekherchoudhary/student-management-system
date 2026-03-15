@@ -5,8 +5,8 @@ def total(marks):
     for mark in marks:
         total_sum += mark
     return total_sum
-def percentage(total_marks):
-     return (total_marks / 3 )
+def percentage(total_marks,marks):
+     return (total_marks /len(marks))
 def grade(percentagee):
     if percentagee >= 90:
         return "A"
@@ -46,7 +46,7 @@ def add_student():
             break
 
     total_marks = total(marks)
-    percentagee = percentage(total_marks)
+    percentagee = percentage(total_marks,marks)
     gradee = grade(percentagee)
 
     student = {
@@ -93,18 +93,20 @@ def find_topper():
             highest_marks = details['total_marks']
             topper_name = details['student_name']
 
+
     print("Topper:", topper_name)
+    print("Marks : " , details['total_marks'])
 
 
     
 def menu():
     while True:
-        choice = int(input("Entere your choice : "))
         print("1. Add student")
         print("2. View all students")
         print("3. Search student")
         print("4. Find topper")
         print("5. Exit")
+        choice = int(input("Entere your choice : "))
         if choice == 1:
             add_student()
         elif choice == 2:
