@@ -38,7 +38,7 @@ def add_student():
             print("Student name should not be empty!")
             continue
         break
-    subjects = ['Physics','Chemistry','Mathematic']
+    subjects = ['Physics', 'Chemistry', 'Mathematics']
     marks =[]
     for sub in subjects:
         while True:
@@ -76,7 +76,7 @@ def view_all_students():
         print("Student name : ",details['student_name'])
         print("Marks : ", details['marks'])
         print("Total marks : ", details['total_marks'])
-        print("Percentage : " , details['percentage'])
+        print("Percentage : " , round(details['percentage'] , 2))
         print("Grade : " , details['grade'])
         print("---------------------")
 
@@ -85,18 +85,18 @@ def search_student():
     if len(students) == 0:
         print("There is no student in the record!")
         return
+    
+    roll_number = input("Enter roll number to search : ")
+    if roll_number in students:
+        details = students[roll_number]
+        print("Roll number : " , roll_number)
+        print("Student name : ",details['student_name'])
+        print("Marks : ", details['marks'])
+        print("Total marks : ", details['total_marks'])
+        print("Percentage : " , details['percentage'])
+        print("Grade : " , details['grade'])
     else:
-        roll_number = input("Enter roll number to search : ")
-        if roll_number in students:
-            details = students[roll_number]
-            print("Roll number : " , roll_number)
-            print("Student name : ",details['student_name'])
-            print("Marks : ", details['marks'])
-            print("Total marks : ", details['total_marks'])
-            print("Percentage : " , details['percentage'])
-            print("Grade : " , details['grade'])
-        else:
-            print(f"With this {roll_number} roll number there is no student in our record! ")
+        print(f"With this {roll_number} roll number there is no student in our record! ")
 def find_topper():
     if len(students) == 0:
         print("There is no student in the record!")
@@ -104,14 +104,23 @@ def find_topper():
 
     topper_name = ""
     highest_marks = -1
+    topper_grade = 'A'
+    topper_marks = []
 
     for roll, details in students.items():
         if details['total_marks'] > highest_marks:
             highest_marks = details['total_marks']
             topper_name = details['student_name']
+            topper_grade = details['grade']
+            topper_marks = details['marks']
+
+
 
 
     print("Topper:", topper_name)
+    print("Total Marks : " , highest_marks)
+    print("Marks : ", topper_marks)
+    print("Grade : " , topper_grade)
     
 
 
