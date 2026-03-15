@@ -1,29 +1,34 @@
 students = {}
-# number_of_students = int(input("How many students are there in your class :"))
-def total(marks):
+
+def calculate_total(marks):
     total_sum = 0
     for mark in marks:
         total_sum += mark
     return total_sum
-def percentage(total_marks,marks):
-     return (total_marks /len(marks))
-def grade(percentagee):
-    if percentagee >= 90:
+
+
+def calculate_percentage(total_marks, marks):
+    return total_marks / len(marks)
+
+
+def calculate_grade(percentage):
+    if percentage >= 90:
         return "A"
-    elif percentagee >= 80:
+    elif percentage >= 80:
         return "B"
-    elif percentagee >= 70:
+    elif percentage >= 70:
         return "C"
-    elif percentagee >= 60:
+    elif percentage >= 60:
         return "D"
-    elif percentagee >= 50:
+    elif percentage >= 50:
         return "E"
     else:
         return "Fail"
-    
+
+
 def add_student():
     while True:
-        roll_number = input("Enter student roll number : ")
+        roll_number = input("Enter student roll number: ")
         if roll_number == "":
             print("Roll number cannot be empty!")
             continue
@@ -33,17 +38,19 @@ def add_student():
         break
 
     while True:
-        student_name = input("Enter student name : ").strip()
+        student_name = input("Enter student name: ").strip()
         if student_name == "":
             print("Student name should not be empty!")
             continue
         break
+
     subjects = ['Physics', 'Chemistry', 'Mathematics']
-    marks =[]
+    marks = []
+
     for sub in subjects:
         while True:
             try:
-                mark = int(input(f"Enter marks for {sub} out of 100 : "))
+                mark = int(input(f"Enter marks for {sub} out of 100: "))
                 if mark < 0 or mark > 100:
                     print("Marks should be between 0 and 100")
                     continue
@@ -51,60 +58,64 @@ def add_student():
                 break
             except ValueError:
                 print("Invalid input! Enter a number only.")
-        
-            
 
-    total_marks = total(marks)
-    percentagee = percentage(total_marks,marks)
-    gradee = grade(percentagee)
+    total_marks = calculate_total(marks)
+    student_percentage = calculate_percentage(total_marks, marks)
+    student_grade = calculate_grade(student_percentage)
 
     student = {
-        'student_name' : student_name ,
-        'marks' : marks ,
-        'total_marks' : total_marks ,
-        'percentage' : percentagee ,
-        'grade' : gradee 
+        'student_name': student_name,
+        'marks': marks,
+        'total_marks': total_marks,
+        'percentage': student_percentage,
+        'grade': student_grade
     }
+
     students[roll_number] = student
+
+
 def view_all_students():
-    if len(students) == 0:
-        print("There is no student in the record!")
+    if not students:
+        print("No student records found!")
         return
-    
-    for roll ,details in students.items():
-        print("Roll number : " , roll)
-        print("Student name : ",details['student_name'])
-        print("Marks : ", details['marks'])
-        print("Total marks : ", details['total_marks'])
-        print("Percentage : " , round(details['percentage'] , 2))
-        print("Grade : " , details['grade'])
+
+    for roll, details in students.items():
+        print("Roll number:", roll)
+        print("Student name:", details['student_name'])
+        print("Marks:", details['marks'])
+        print("Total marks:", details['total_marks'])
+        print("Percentage:", round(details['percentage'], 2))
+        print("Grade:", details['grade'])
         print("---------------------")
 
 
 def search_student():
-    if len(students) == 0:
-        print("There is no student in the record!")
+    if not students:
+        print("No student records found!")
         return
-    
-    roll_number = input("Enter roll number to search : ")
+
+    roll_number = input("Enter roll number to search: ")
+
     if roll_number in students:
         details = students[roll_number]
-        print("Roll number : " , roll_number)
-        print("Student name : ",details['student_name'])
-        print("Marks : ", details['marks'])
-        print("Total marks : ", details['total_marks'])
-        print("Percentage : " , details['percentage'])
-        print("Grade : " , details['grade'])
+        print("Roll number:", roll_number)
+        print("Student name:", details['student_name'])
+        print("Marks:", details['marks'])
+        print("Total marks:", details['total_marks'])
+        print("Percentage:", round(details['percentage'], 2))
+        print("Grade:", details['grade'])
     else:
-        print(f"With this {roll_number} roll number there is no student in our record! ")
+        print(f"No student found with roll number {roll_number}.")
+
+
 def find_topper():
-    if len(students) == 0:
-        print("There is no student in the record!")
+    if not students:
+        print("No student records found!")
         return
 
     topper_name = ""
     highest_marks = -1
-    topper_grade = 'A'
+    topper_grade = "A"
     topper_marks = []
 
     for roll, details in students.items():
@@ -114,17 +125,12 @@ def find_topper():
             topper_grade = details['grade']
             topper_marks = details['marks']
 
-
-
-
     print("Topper:", topper_name)
-    print("Total Marks : " , highest_marks)
-    print("Marks : ", topper_marks)
-    print("Grade : " , topper_grade)
-    
+    print("Total Marks:", highest_marks)
+    print("Marks:", topper_marks)
+    print("Grade:", topper_grade)
 
 
-    
 def menu():
     while True:
         print("1. Add student")
@@ -132,12 +138,14 @@ def menu():
         print("3. Search student")
         print("4. Find topper")
         print("5. Exit")
+
         while True:
             try:
-                choice = int(input("Entere your choice : "))
+                choice = int(input("Enter your choice: "))
                 break
             except ValueError:
-                print("Invalid input! Please enter number only.")
+                print("Invalid input! Please enter numbers only.")
+
         if choice == 1:
             add_student()
         elif choice == 2:
@@ -147,8 +155,10 @@ def menu():
         elif choice == 4:
             find_topper()
         elif choice == 5:
-            print("Thankyou for using this ")
+            print("Thank you for using this.")
             break
         else:
             print("Invalid choice")
+
+
 menu()
