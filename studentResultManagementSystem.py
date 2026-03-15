@@ -26,6 +26,7 @@ def calculate_grade(percentage):
     else:
         return "Fail"
 
+
 def display_student(roll, details):
     print("Roll number:", roll)
     print("Student name:", details['student_name'])
@@ -128,6 +129,8 @@ def find_topper():
     print("Topper Details")
     print("---------------------")
     display_student(topper_roll, topper_details)
+
+
 def update_student():
     if not students:
         print("No student records found!")
@@ -180,22 +183,24 @@ def update_student():
 
     else:
         print("Invalid update choice!")
-            
+
+
 def delete_student():
     if not students:
         print("No student records found!")
         return
 
-    roll_number = input("Enter roll number to update details: ")
+    roll_number = input("Enter roll number to delete student: ")
 
     if roll_number not in students:
         print("Student not found!")
         return
-    if roll_number in students:
-        details = students[roll_number]
-        display_student(roll_number,details)
-    students.pop(roll_number)   
-    print(f"Student with above details deleted")
+
+    details = students[roll_number]
+    display_student(roll_number, details)
+    students.pop(roll_number)
+    print("Student with above details deleted.")
+
 
 def menu():
     while True:
@@ -205,7 +210,7 @@ def menu():
         print("3. Search student")
         print("4. Find topper")
         print("5. Update student records")
-        print("5. Delete student records")
+        print("6. Delete student records")
         print("7. Exit")
 
         while True:
@@ -231,7 +236,7 @@ def menu():
             print("Thank you for using this.")
             break
         else:
-            print("Invalid choice! Please enter a number between 1 and 5.")
+            print("Invalid choice! Please enter a number between 1 and 7.")
 
 
 menu()
