@@ -25,6 +25,20 @@ def calculate_grade(percentage):
         return "E"
     else:
         return "Fail"
+def get_valid_marks():
+    subjects = ['Physics', 'Chemistry', 'Mathematics']
+    marks = []
+    for sub in subjects:
+        while True:
+            try :
+                mark = int(input(f"Enter mark for {sub} out of 100: "))
+                if mark < 0 or mark > 100:
+                    continue
+                marks.append(mark)
+                break
+            except ValueError:
+                print("Invalid input! Enter a number only.")
+    return marks
 
 
 def display_student(roll, details):
@@ -55,22 +69,7 @@ def add_student():
             print("Student name should not be empty!")
             continue
         break
-
-    subjects = ['Physics', 'Chemistry', 'Mathematics']
-    marks = []
-
-    for sub in subjects:
-        while True:
-            try:
-                mark = int(input(f"Enter marks for {sub} out of 100: "))
-                if mark < 0 or mark > 100:
-                    print("Marks should be between 0 and 100")
-                    continue
-                marks.append(mark)
-                break
-            except ValueError:
-                print("Invalid input! Enter a number only.")
-
+    marks = get_valid_marks()
     total_marks = calculate_total(marks)
     student_percentage = calculate_percentage(total_marks, marks)
     student_grade = calculate_grade(student_percentage)
@@ -155,20 +154,7 @@ def update_student():
         print("Name updated successfully!")
 
     elif update_choice == "marks":
-        subjects = ['Physics', 'Chemistry', 'Mathematics']
-        new_marks = []
-
-        for sub in subjects:
-            while True:
-                try:
-                    mark = int(input(f"Enter your marks in {sub} out of 100: "))
-                    if mark < 0 or mark > 100:
-                        print("Marks should be between 0 and 100")
-                        continue
-                    new_marks.append(mark)
-                    break
-                except ValueError:
-                    print("Invalid input! Enter a number only.")
+        new_marks = get_valid_marks()
 
         students[roll_number]['marks'] = new_marks
         total_marks = calculate_total(new_marks)
