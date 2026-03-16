@@ -28,11 +28,13 @@ def calculate_grade(percentage):
 def get_valid_marks():
     subjects = ['Physics', 'Chemistry', 'Mathematics']
     marks = []
+
     for sub in subjects:
         while True:
-            try :
+            try:
                 mark = int(input(f"Enter mark for {sub} out of 100: "))
                 if mark < 0 or mark > 100:
+                    print("Marks should be between 0 and 100.")
                     continue
                 marks.append(mark)
                 break
@@ -50,18 +52,18 @@ def display_student(roll, details):
     print("Grade:", details['grade'])
     print("---------------------")
 
+def generate_roll_number():
+    if not students:
+        return '1'
+    highest_roll = max(int(roll) for roll in students.keys())
+    return str(highest_roll + 1)
+
 
 # ---------- MAIN FUNCTIONS ----------
 def add_student():
-    while True:
-        roll_number = input("Enter student roll number: ")
-        if roll_number == "":
-            print("Roll number cannot be empty!")
-            continue
-        if roll_number in students:
-            print("Roll number already exists!")
-            continue
-        break
+    
+    roll_number = generate_roll_number()
+    print("Assigned roll number:", roll_number)  
 
     while True:
         student_name = input("Enter student name: ").strip()
@@ -184,8 +186,14 @@ def delete_student():
 
     details = students[roll_number]
     display_student(roll_number, details)
-    students.pop(roll_number)
-    print("Student with above details deleted.")
+
+    confirm = input("Are you sure you want to delete this student? (y/n): ").strip().lower()
+
+    if confirm == "y" or confirm == "yes":
+        students.pop(roll_number)
+        print("Student with above details deleted.")
+    else:
+        print("Deletion cancelled.")
 
 
 def menu():
