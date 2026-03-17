@@ -1,3 +1,4 @@
+import json
 students = {}
 
 # ---------- HELPER FUNCTIONS ----------
@@ -58,6 +59,18 @@ def generate_roll_number():
     highest_roll = max(int(roll) for roll in students.keys())
     return str(highest_roll + 1)
 
+def save_students():
+    with open ("students.json" , "w") as file:
+        json.dump(students , file)
+
+def load_students():
+    global students
+    try:
+        with open ("students.json" , "r" ) as file:
+            students = json.load(file)
+    except FileNotFoundError:
+        students = {}
+
 
 # ---------- MAIN FUNCTIONS ----------
 def add_student():
@@ -85,6 +98,7 @@ def add_student():
     }
 
     students[roll_number] = student
+    save_students()
     print("Student record added successfully!")
     print("---------------------")
 
@@ -153,6 +167,7 @@ def update_student():
                 continue
             break
         students[roll_number]['student_name'] = new_name
+        save_students()
         print("Name updated successfully!")
 
     elif update_choice == "marks":
@@ -166,6 +181,8 @@ def update_student():
         students[roll_number]['total_marks'] = total_marks
         students[roll_number]['grade'] = student_grade
         students[roll_number]['percentage'] = student_percentage
+
+        save_students()
 
         print("Marks updated successfully!")
 
@@ -191,6 +208,7 @@ def delete_student():
 
     if confirm == "y" or confirm == "yes":
         students.pop(roll_number)
+        save_students()
         print("Student with above details deleted.")
     else:
         print("Deletion cancelled.")
@@ -232,5 +250,5 @@ def menu():
         else:
             print("Invalid choice! Please enter a number between 1 and 7.")
 
-
+load_students()
 menu()
